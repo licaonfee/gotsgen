@@ -18,7 +18,6 @@ package gotsgen
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -71,7 +70,7 @@ func Query(start time.Time, end time.Time, samples uint, t string) (*TimeSeries,
 	}
 
 	duration := end.Sub(start).Seconds() / float64(samples)
-	period, _ := time.ParseDuration(fmt.Sprintf("%fs", duration))
+	period := time.Second * time.Duration(duration)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	// call the generator (see generators.go) corresponding to the given category
 	typeFunc[t].(func(*TimeSeries, time.Time, time.Duration, uint, *rand.Rand))(ts, start, period, samples, r)
