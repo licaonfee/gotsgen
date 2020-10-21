@@ -57,8 +57,8 @@ func Query(start time.Time, end time.Time, samples uint, t string) (*TimeSeries,
 	}
 
 	ts := &TimeSeries{
-		XValues: []time.Time{},
-		YValues: []float64{},
+		XValues: make([]time.Time, 0, samples),
+		YValues: make([]float64, 0, samples),
 	}
 
 	// todo test if end date != start date and if end date > start date
